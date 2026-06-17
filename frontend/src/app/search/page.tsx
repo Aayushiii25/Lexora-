@@ -70,7 +70,7 @@ export default function SearchPage() {
             }}
           />
         </div>
-        <Select value={searchType} onValueChange={setSearchType}>
+        <Select value={searchType} onValueChange={(val) => setSearchType(val || "")}>
           <SelectTrigger className="w-[180px]">
             <SelectValue />
           </SelectTrigger>

@@ -92,7 +92,7 @@ export default function ComparePage() {
           <div className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground mb-2">
             Document A
           </div>
-          <Select value={docAId} onValueChange={setDocAId}>
+          <Select value={docAId} onValueChange={(val) => setDocAId(val || "")}>
             <SelectTrigger>
               <SelectValue placeholder="Select first document" />
             </SelectTrigger>
@@ -112,7 +112,7 @@ export default function ComparePage() {
           <div className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground mb-2">
             Document B
           </div>
-          <Select value={docBId} onValueChange={setDocBId}>
+          <Select value={docBId} onValueChange={(val) => setDocBId(val || "")}>
             <SelectTrigger>
               <SelectValue placeholder="Select second document" />
             </SelectTrigger>

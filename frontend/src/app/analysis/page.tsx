@@ -126,7 +126,7 @@ function RenderAnalysisContent({ type, content }: { type: string; content: Recor
   );
 }
 
-export default function AnalysisPage() {
+function AnalysisPageContent() {
   const searchParams = useSearchParams();
   const initialDocId = searchParams.get("doc") || "";
   const [selectedDocId, setSelectedDocId] = useState(initialDocId);
@@ -283,5 +283,14 @@ export default function AnalysisPage() {
         </div>
       )}
     </div>
+  );
+}
+
+import React from "react";
+export default function AnalysisPage() {
+  return (
+    <React.Suspense fallback={<div className="p-8 text-center text-muted-foreground">Loading workspace...</div>}>
+      <AnalysisPageContent />
+    </React.Suspense>
   );
 }

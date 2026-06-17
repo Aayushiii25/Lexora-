@@ -47,7 +47,7 @@ export default function ObligationsPage() {
   const extractMutation = useMutation({
     mutationFn: () => extractObligations(selectedDocId),
     onSuccess: (data) => {
-      const d = data as {
+      const d = data as unknown as {
         obligations?: Obligation[];
         by_party?: Record<string, number>;
         by_type?: Record<string, number>;
@@ -171,7 +171,7 @@ export default function ObligationsPage() {
 
           {/* Filters */}
           <div className="flex items-center gap-3">
-            <Select value={filterType} onValueChange={setFilterType}>
+            <Select value={filterType} onValueChange={(val) => setFilterType(val || "")}>
               <SelectTrigger className="w-[200px]">
                 <SelectValue placeholder="Filter by type" />
               </SelectTrigger>
@@ -182,7 +182,7 @@ export default function ObligationsPage() {
                 ))}
               </SelectContent>
             </Select>
-            <Select value={filterPriority} onValueChange={setFilterPriority}>
+            <Select value={filterPriority} onValueChange={(val) => setFilterPriority(val || "")}>
               <SelectTrigger className="w-[200px]">
                 <SelectValue placeholder="Filter by priority" />
               </SelectTrigger>

@@ -16,7 +16,7 @@ import {
 } from "@/components/ui/select";
 import { ShieldAlert, FileText, AlertTriangle } from "lucide-react";
 
-export default function RiskPage() {
+function RiskPageContent() {
   const searchParams = useSearchParams();
   const [selectedDocId, setSelectedDocId] = useState(searchParams.get("doc") || "");
 
@@ -228,5 +228,14 @@ export default function RiskPage() {
         </div>
       )}
     </div>
+  );
+}
+
+import React from "react";
+export default function RiskPage() {
+  return (
+    <React.Suspense fallback={<div className="p-8 text-center text-muted-foreground">Loading dashboard...</div>}>
+      <RiskPageContent />
+    </React.Suspense>
   );
 }

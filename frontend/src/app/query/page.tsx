@@ -39,7 +39,7 @@ function CitationBlock({ citation }: { citation: Citation }) {
   );
 }
 
-export default function QueryPage() {
+function QueryPageContent() {
   const searchParams = useSearchParams();
   const [selectedDocId, setSelectedDocId] = useState(searchParams.get("doc") || "");
   const [input, setInput] = useState("");
@@ -59,7 +59,7 @@ export default function QueryPage() {
 
   useEffect(() => {
     if (historyData?.messages) {
-      setMessages(historyData.messages);
+      setMessages(historyData.messages as ChatMessage[]);
     }
   }, [historyData]);
 
@@ -70,7 +70,7 @@ export default function QueryPage() {
   const sendMutation = useMutation({
     mutationFn: () => sendChatMessage(selectedDocId, input),
     onSuccess: (response) => {
-      setMessages((prev) => [...prev, response]);
+      setMessages((prev) => [...prev, response as ChatMessage]);
       setInput("");
     },
     onError: (e: Error) => {
@@ -106,7 +106,7 @@ export default function QueryPage() {
       </div>
 
       <div className="flex items-center gap-3">
-        <Select value={selectedDocId} onValueChange={(v) => { setSelectedDocId(v); setMessages([]); }}>
+        <Select value={selectedDocId} onValueChange={(v) => { setSelectedDocId(v || ""); setMessages([]); }}>
           <SelectTrigger className="w-[400px]">
             <SelectValue placeholder="Select document to query" />
           </SelectTrigger>
@@ -220,5 +220,14 @@ export default function QueryPage() {
         </Button>
       </div>
     </div>
+  );
+}
+
+import React from "react";
+export default function QueryPage() {
+  return (
+    <React.Suspense fallback={<div className="p-8 text-center text-muted-foreground">Loading console...</div>}>
+      <QueryPageContent />
+    </React.Suspense>
   );
 }
