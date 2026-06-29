@@ -1,4 +1,4 @@
-# Nexus
+# Lexora
 
 Nexus is an AI-powered legal document analysis platform designed to automate contract review and risk assessment. It leverages Retrieval-Augmented Generation (RAG) and semantic vector search to allow users to instantly extract obligations, classify risks, and query large legal repositories with high precision.
 
